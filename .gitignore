@@ -1,0 +1,63 @@
+# ==========================================
+# Python Bytecode & Cache
+# ==========================================
+__pycache__/
+*.py[cod]
+*$py.class
+
+# ==========================================
+# Django Specifics
+# ==========================================
+# Never commit your local database
+db.sqlite3
+db.sqlite3-journal
+
+# Ignore collected static files (generate these on the production server)
+/static/
+/staticfiles/
+
+# Ignore user-uploaded media files
+/media/
+
+# ==========================================
+# Environments & Dependencies
+# ==========================================
+# Virtual environments must stay local
+.venv/
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+.env/
+
+# Environment secrets and credentials
+.env
+.secrets
+*local_settings.py
+
+# ==========================================
+# Testing & Code Quality
+# ==========================================
+.htmlcov/
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.log
+
+# ==========================================
+# IDEs & System Files
+# ==========================================
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+.DS_Store
+Thumbs.db
