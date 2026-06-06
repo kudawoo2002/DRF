@@ -14,6 +14,7 @@ from rest_framework import mixins, generics, viewsets
 from blogs.models import Blog, Comment
 from blogs.serializers import BlogSerializer, CommentSerializer
 from .paginations import CustomePagination
+from asserts.filters import AssertFilter
 
 # Create your views here.
 
@@ -176,6 +177,8 @@ class AssertDetail(generics.RetrieveUpdateDestroyAPIView):
 class AssertsViewset(viewsets.ModelViewSet):
     queryset = Assert.objects.all()
     serializer_class = AssertSerializer
+    # filterset_fields = ['department']
+    filterset_class = AssertFilter
 
 
 class BlogsView(generics.ListCreateAPIView):
