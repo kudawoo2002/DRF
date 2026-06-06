@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse
 from students.models import Student
 from employees.models import Employee
@@ -10,7 +10,7 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.views import APIView
 from django.http import Http404
-from rest_framework import mixins, generics
+from rest_framework import mixins, generics, viewsets
 
 # Create your views here.
 
@@ -122,6 +122,8 @@ class ProductDetail(mixins.RetrieveModelMixin,mixins.UpdateModelMixin, mixins.De
     def delete(self, request, pk):
         return self.destroy(request, pk)
     
+
+'''
 class Asserts(generics.ListCreateAPIView):
     queryset = Assert.objects.all()
     serializer_class = AssertSerializer
@@ -132,3 +134,42 @@ class AssertDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Assert.objects.all()
     serializer_class = AssertSerializer
     lookup_field = "pk"
+'''
+
+# ViewSet class base
+
+# class AssertsViewset(viewsets.ViewSet):
+#     def list(self, request):
+#         queryset = Assert.objects.all()
+#         serializer = AssertSerializer(queryset, many=True)
+#         return Response(serializer.data)
+    
+#     def create(self, request):
+#         serializer = AssertSerializer(data=request.data)
+#         if serializer.is_valid():
+#             serializer.save()
+#             return Response(serializer.data, status=status.HTTP_201_CREATED)
+#         else:
+#             return Response(serializer.errors, status=status.HTTP_404_NOT_FOUND)
+
+#     def retrieve(self, request, pk=None):
+#         assert_obj = get_object_or_404(Assert, pk=pk)
+#         serializer = AssertSerializer(assert_obj)
+#         return Response(serializer.data, status=status.HTTP_200_OK)
+    
+#     def update(self, request, pk=None):
+#         assert_obj = get_object_or_404(Assert, pk=pk)
+#         serializer = AssertSerializer(assert_obj,data=request.data)
+#         if serializer.is_valid():
+#             serializer.save()
+#             return Response(serializer.data, status=status.HTTP_201_CREATED)
+        
+#     def destroy(self, request, pk=None):
+#         assert_obj = get_object_or_404(Assert, pk=pk)
+#         assert_obj.delete()
+#         return Response(status=status.HTTP_404_NOT_FOUND)
+
+
+class AssertsViewset(viewsets.ModelViewSet):
+    queryset = Assert.objects.all()
+    serializer_class = AssertSerializer
