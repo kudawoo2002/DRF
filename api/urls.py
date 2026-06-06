@@ -17,4 +17,8 @@ urlpatterns = [
     # path("asserts/", views.Asserts.as_view()),
     # path("asserts/<int:pk>/", views.AssertDetail.as_view()),
     path("", include(router.urls)),
+    path("comments/", views.CommentsView.as_view()),
+    path("comments/<int:pk>/",views.CommentDetail.as_view()),
+    path("blogs/", views.BlogsView.as_view()),
+    path("blogs/<int:pk>/", views.BlogDetail.as_view()),
 ]

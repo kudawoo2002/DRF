@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'employees',
     'products',
     'asserts',
+    'blogs',
     
 ]
 

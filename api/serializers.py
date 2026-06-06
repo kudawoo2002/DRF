@@ -24,6 +24,7 @@ class ProductSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 class AssertSerializer(serializers.ModelSerializer):
+    
     class Meta:
         model = Assert
         fields = "__all__"
