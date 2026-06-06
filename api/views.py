@@ -3,7 +3,8 @@ from django.http import JsonResponse
 from students.models import Student
 from employees.models import Employee
 from products.models import Product
-from .serializers import StudentSerializer, EmployeeSerializer, ProductSerializer
+from asserts.models import Assert
+from .serializers import StudentSerializer, EmployeeSerializer, AssertSerializer,ProductSerializer
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.decorators import api_view
@@ -120,3 +121,14 @@ class ProductDetail(mixins.RetrieveModelMixin,mixins.UpdateModelMixin, mixins.De
     
     def delete(self, request, pk):
         return self.destroy(request, pk)
+    
+class Asserts(generics.ListCreateAPIView):
+    queryset = Assert.objects.all()
+    serializer_class = AssertSerializer
+
+
+
+class AssertDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Assert.objects.all()
+    serializer_class = AssertSerializer
+    lookup_field = "pk"

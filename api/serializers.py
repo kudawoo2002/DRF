@@ -2,6 +2,7 @@ from rest_framework import serializers
 from students.models import Student
 from employees.models import Employee
 from products.models import Product
+from asserts.models import Assert
 
 class StudentSerializer(serializers.ModelSerializer):
     class Meta:
@@ -20,4 +21,9 @@ class EmployeeSerializer(serializers.ModelSerializer):
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
+        fields = "__all__"
+
+class AssertSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Assert
         fields = "__all__"
