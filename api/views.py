@@ -2,12 +2,15 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from students.models import Student
 from employees.models import Employee
-from .serializers import StudentSerializer, EmployeeSerializer
+from products.models import Product
+from .serializers import StudentSerializer, EmployeeSerializer, ProductSerializer
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.views import APIView
 from django.http import Http404
+from rest_framework import mixins, generics
+
 # Create your views here.
 
 @api_view(["GET", "POST"])
@@ -93,4 +96,27 @@ class EmployeeDetail(APIView):
         employeeDetail.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
     
-         
+
+
+class Products(mixins.ListModelMixin, mixins.CreateModelMixin, generics.GenericAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+
+    def get(self,request):
+        return self.list(request)
+    
+    def post(self, request):
+        return self.create(request)
+
+class ProductDetail(mixins.RetrieveModelMixin,mixins.UpdateModelMixin, mixins.DestroyModelMixin, generics.GenericAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+
+    def get(self, request, pk):
+        return self.retrieve(request, pk)
+    
+    def put(self, request, pk):
+        return self.update(request, pk)
+    
+    def delete(self, request, pk):
+        return self.destroy(request, pk)
